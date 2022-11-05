@@ -17,6 +17,6 @@ connect(mongoUri).then(() => {
     })
   )
 
-  launchBot(bot)
   setHandlers(bot)
+  launchBot(bot)
 })
