@@ -5,6 +5,7 @@ import { Bot, session } from 'grammy'
 import {
   token,
   mongoUri,
+  spamControl,
   launchBot,
   initial,
   getSessionKey,
@@ -19,6 +20,7 @@ connect(mongoUri).then(() => {
   const bot: GruppenBot = new Bot(token)
 
   bot.use(session({ initial, getSessionKey, storage }))
+  bot.use(spamControl)
 
   setHandlers(bot)
   launchBot(bot)

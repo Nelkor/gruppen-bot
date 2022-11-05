@@ -3,7 +3,7 @@ import { incrementRatingOfUser, getTop } from '@/group-engine'
 
 export const setHandlers = (bot: GruppenBot) => {
   bot.chatType('private').command('start', ctx => {
-    ctx.reply(`Привет x${++ctx.session.pizzaCount}`).then()
+    ctx.reply('Okay').then()
   })
 
   bot.chatType('group').command('rating', async ctx => {

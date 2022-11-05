@@ -3,7 +3,7 @@ import { Context } from 'grammy'
 import { SessionData } from './types'
 
 export const initial = (): SessionData => ({
-  pizzaCount: 0,
+  lastMessageTime: 0,
 })
 
 export const getSessionKey = ({ from, chat }: Context) =>
