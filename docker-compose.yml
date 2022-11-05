@@ -10,3 +10,24 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: ${MONGO_PASSWORD}
     ports:
       - '${MONGO_PORT}:27017'
+
+  db:
+    image: mariadb
+    environment:
+      MYSQL_DATABASE: ${MARIA_DATABASE}
+      MYSQL_USER: ${MARIA_USER}
+      MYSQL_PASSWORD: ${MARIA_PASSWORD}
+      MYSQL_ROOT_PASSWORD: ${MARIA_ROOT_PASSWORD}
+    volumes:
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./volumes/maria:/var/lib/mysql
+    ports:
+      - '${MARIA_PORT}:3306'
+
+  pma:
+    image: phpmyadmin
+    environment:
+      PMA_USER: ${MARIA_USER}
+      PMA_PASSWORD: ${MARIA_PASSWORD}
+    ports:
+      - '${PMA_PORT}:80'
