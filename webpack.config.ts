@@ -17,7 +17,10 @@ export default {
     alias,
     extensions: ['.js', '.ts'],
   },
-  externals,
+  externals: {
+    'mysql2/promise': 'commonjs mysql2/promise',
+    ...externals,
+  },
   module: {
     rules: [
       {

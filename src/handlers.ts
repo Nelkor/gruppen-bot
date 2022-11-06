@@ -2,6 +2,14 @@ import { GruppenBot } from '@/bot-tools'
 import { incrementRatingOfUser, getTop } from '@/group-engine'
 
 export const setHandlers = (bot: GruppenBot) => {
+  bot.chatType('private').command('test', async ctx => {
+    const [rows] = await bot.db.query('SELECT * FROM `users`')
+
+    console.log(rows)
+
+    ctx.reply('test').then()
+  })
+
   bot.chatType('private').command('start', ctx => {
     ctx.reply('Okay').then()
   })

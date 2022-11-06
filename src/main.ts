@@ -5,6 +5,7 @@ import { Bot, session } from 'grammy'
 import {
   token,
   mongoUri,
+  connectDb,
   spamControl,
   launchBot,
   initial,
@@ -14,11 +15,12 @@ import {
 
 import { setHandlers } from './handlers'
 
-connect(mongoUri).then(() => {
+Promise.all([connectDb(), connect(mongoUri)]).then(([db]) => {
   const collection = connection.db.collection<ISession>('sessions')
   const storage = new MongoDBAdapter({ collection })
-  const bot: GruppenBot = new Bot(token)
+  const bot = new Bot(token) as GruppenBot
 
+  bot.db = db
   bot.use(session({ initial, getSessionKey, storage }))
   bot.use(spamControl)
 

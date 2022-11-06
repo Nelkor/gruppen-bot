@@ -1,4 +1,5 @@
 import { Bot, Context, SessionFlavor } from 'grammy'
+import { Connection } from 'mysql2/promise'
 
 export interface SessionData {
   lastMessageTime: number
@@ -6,4 +7,6 @@ export interface SessionData {
 
 export type GruppenContext = Context & SessionFlavor<SessionData>
 
-export type GruppenBot = Bot<GruppenContext>
+export interface GruppenBot extends Bot<GruppenContext> {
+  db: Connection
+}
