@@ -1,3 +1,4 @@
-export interface GroupUser {
+export interface UserInTop {
+  telegramUserId: number
   rating: number
 }

@@ -32,6 +32,10 @@ export default {
           presets: ['@babel/preset-typescript'],
         },
       },
+      {
+        test: /\.sql$/,
+        type: 'asset/source',
+      },
     ],
   },
   plugins: [
