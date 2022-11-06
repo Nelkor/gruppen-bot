@@ -1,4 +1,4 @@
-import { createConnection } from 'mysql2/promise'
+import { createPool } from 'mysql2/promise'
 
 import {
   mariaDatabase,
@@ -8,7 +8,8 @@ import {
 } from './environment'
 
 export const connectDb = () =>
-  createConnection({
+  createPool({
+    connectionLimit: 2,
     database: mariaDatabase,
     user: mariaUser,
     password: mariaPassword,
