@@ -1,5 +1,5 @@
 import { Bot, Context, SessionFlavor } from 'grammy'
-import { Pool } from 'mysql2/promise'
+import { ResultSetHeader } from 'mysql2/promise'
 
 export interface SessionData {
   lastMessageTime: number
@@ -7,6 +7,14 @@ export interface SessionData {
 
 export type GruppenContext = Context & SessionFlavor<SessionData>
 
+type QueryData = <T>(sql: string, values?: (string | number)[]) => Promise<T[]>
+
+type QueryAction = (
+  sql: string,
+  values?: (string | number)[]
+) => Promise<ResultSetHeader>
+
 export interface GruppenBot extends Bot<GruppenContext> {
-  db: Pool
+  dbQueryData: QueryData
+  dbQueryAction: QueryAction
 }

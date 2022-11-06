@@ -3,11 +3,9 @@ import { incrementRatingOfUser, getTop } from '@/group-engine'
 
 export const setHandlers = (bot: GruppenBot) => {
   bot.chatType('private').command('test', async ctx => {
-    const [rows] = await bot.db.query('SELECT * FROM `users`')
+    const rows = await bot.dbQueryData('SELECT * FROM `users`')
 
-    console.log(rows)
-
-    ctx.reply('test').then()
+    ctx.reply(JSON.stringify(rows.slice(0, 3))).then()
   })
 
   bot.chatType('private').command('start', ctx => {

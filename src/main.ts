@@ -6,6 +6,8 @@ import {
   token,
   mongoUri,
   connectDb,
+  createQueryData,
+  createQueryAction,
   spamControl,
   launchBot,
   initial,
@@ -20,7 +22,9 @@ Promise.all([connectDb(), connect(mongoUri)]).then(([db]) => {
   const storage = new MongoDBAdapter({ collection })
   const bot = new Bot(token) as GruppenBot
 
-  bot.db = db
+  bot.dbQueryData = createQueryData(db)
+  bot.dbQueryAction = createQueryAction(db)
+
   bot.use(session({ initial, getSessionKey, storage }))
   bot.use(spamControl)
 
