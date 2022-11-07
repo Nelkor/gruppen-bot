@@ -2,7 +2,7 @@ import { NextFunction } from 'grammy'
 
 import { GruppenContext } from './types'
 
-export const PASS_DELAY = 1000
+const PASS_DELAY = 1000
 
 export const spamControl = (ctx: GruppenContext, next: NextFunction) => {
   const now = Date.now()
